@@ -1,0 +1,10 @@
+Jenkins[[:space:]]Pipeline[[:space:]]to[[:space:]]Rsync[[:space:]]with[[:space:]]Github[[:space:]]and[[:space:]]build[[:space:]]Pom.txt filter=lfs diff=lfs merge=lfs -text
+Jenkins[[:space:]]troblshooting[[:space:]]tips[[:space:]]1.txt filter=lfs diff=lfs merge=lfs -text
+PowerShell[[:space:]]-[[:space:]]script[[:space:]]to[[:space:]]Restart[[:space:]]down[[:space:]]services filter=lfs diff=lfs merge=lfs -text
+Linux[[:space:]]-[[:space:]]check[[:space:]]utilization&send[[:space:]]alerts.docx[[:space:]]script[[:space:]].txt filter=lfs diff=lfs merge=lfs -text
+Linux[[:space:]]-check[[:space:]]the[[:space:]]outdated[[:space:]]software[[:space:]]packages[[:space:]]and[[:space:]]update[[:space:]]it filter=lfs diff=lfs merge=lfs -text
+Linux[[:space:]]infrastrcture[[:space:]]assessment filter=lfs diff=lfs merge=lfs -text
+PoweShell-[[:space:]]check[[:space:]]utilization&send[[:space:]]alerts[[:space:]]Part1 filter=lfs diff=lfs merge=lfs -text
+PoweShell-[[:space:]]check[[:space:]]utilization&send[[:space:]]alerts[[:space:]]Part2.txt filter=lfs diff=lfs merge=lfs -text
+PowerShell[[:space:]]-[[:space:]]sign[[:space:]]scrips[[:space:]]before[[:space:]]run[[:space:]]it[[:space:]]on[[:space:]]any[[:space:]]server.txt filter=lfs diff=lfs merge=lfs -text
+README.md filter=lfs diff=lfs merge=lfs -text

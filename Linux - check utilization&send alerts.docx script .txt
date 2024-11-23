@@ -1,14 +1,3 @@
-#!/bin/bash
-# This script checks the current CPU utilization and sends an email alert if it exceeds a certain threshold.
-# Set the threshold for CPU utilization (in %)
-THRESHOLD= 80
-# Get the current CPU utilization in % 
-CPU_UTILIZATION=$(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4}') 
-# Check if the utilization is above the threshold 
-if [ "$CPU_UTILIZATION" -gt "$THRESHOLD" ]; then
-    # Get the current disk space usage in % 
-    DISK_USAGE=$(df -h | awk '$NF=="/"{printf "%s\t\t", $5}')
-    # Send an email alert with the details of CPU utilization and disk space usage 
-    echo "The current CPU utilization is $CPU_UTILIZATION% which is above the threshold of $THRESHOLD%. The current disk space usage is $DISK_USAGE." | mail -s "High CPU Utilization Alert!" user@example.com 
-    echo "Email alert sent!" 
-fi
+version https://git-lfs.github.com/spec/v1
+oid sha256:2c112a618586335694202b2069efaa1c1a514c955fd3cfcf81ac256f62207528
+size 837
