@@ -1,0 +1,43 @@
+    1- Create a code signing certificate:
+        Open PowerShell as an administrator
+        Run the command New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=<proclientscriptsign" -KeyUsage DigitalSignature
+        (Replace <CertificateName> with a name of your choice)
+
+    2- Export the certificate:
+        Run the command Export-Certificate -Cert Cert:"\LocalMachine\My\CF4F48B5916DB304D480C0B1BCFFAE4D6566A911" -FilePath "D:\Path\Sign Jenkins Scripts\Signed Scripts\proclientscriptsign.cer"
+        (Replace <Thumbprint> with the thumbprint of the certificate, which can be found by running the command Get-ChildItem -Path Cert:\LocalMachine\My)
+        (Replace <Path> with the directory where you want to save the exported certificate)
+        (Replace <FileName> with the name you want to give the exported certificate file)
+
+    3- Create a PowerShell script:
+        Open a text editor and create a new file
+        Type in the PowerShell commands you want to run
+        Save the file with a .ps1 extension (e.g. script.ps1)
+
+    4- Sign the PowerShell script with the code signing certificate:
+        Run the command Set-AuthenticodeSignature -FilePath D:\path\Sign Jenkins Scripts\Signed Scripts\check-iis.ps1 -Certificate (Get-ChildItem -Path Cert:"\LocalMachine\My\CF4F48B5916DB304D480C0B1BCFFAE4D6566A911")
+        (Replace <Path> with the directory where your script file is saved)
+        (Replace <Thumbprint> with the thumbprint of the certificate, as before)
+
+    5- Require server verification before running the script:
+        Open the Group Policy Editor (gpedit.msc)
+        Navigate to Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options
+        Find the setting "Unsigned script execution policy" and set it to "Require signing"
+        Find the setting "Execution policy" and set it to "AllSigned"
+
+Now, whenever you try to run a PowerShell script on the server, it will check for a valid signature before allowing the script to run.
+---------------------------------------------------------------------
+ to import your signature into local server which you need to run a script on it : 
+Import-Certificate -FilePath "\\192.168.1.51\share1\m.cer" -CertStoreLocation Cert:\LocalMachine\My
+then start to sign your script like step number 4 here 
+to test shared folder : Test-Path "\\192.168.1.51\share1\m.cer"
+---------------------------------------------------------------------
+To control Excution Policy on servers : 
+Get-ExecutionPolicy                         ,,,, thats to know current setting 
+Set-ExecutionPolicy RemoteSigned           ,,,,to modify
+****
+    Restricted: Does not allow any scripts to run.
+    AllSigned: Only allows scripts signed by a trusted publisher to run.
+    RemoteSigned: Allows local scripts to run, but only allows remote scripts to run if they are signed by a trusted publisher.
+    Unrestricted: Allows all scripts to run, including those that are unsigned.
+
