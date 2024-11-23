@@ -1,0 +1,49 @@
+pipeline{
+agent any
+options {
+        timeout(time: 60, unit: 'HOURS')   // timeout on whole pipeline job
+    }
+    environment{
+        PATH= "/usr/local/apache-maven/apache-maven-3.8.3/apache-maven-3.8.3/bin:$PATH"
+        
+    }
+stages{
+stage('clone CSC') { 
+steps{
+        checkout([$class: 'GitSCM',
+        branches: [[name: "${'CSC-Automation'}"]],
+        extensions: [[$class: 'CloneOption', timeout: 20000]],
+        gitTool: 'Default', 
+        userRemoteConfigs: [[credentialsId: 'bishr', url: 'https://github.com/reoPath.git']]
+    ])}}
+stage('Rsyncing-CSC') { 
+            steps {
+                
+             sh 'rsync -a /var/lib/jenkins/workspace/DirOfThePipeline/* /dependency/CSC'
+    }}
+  stage('clone CSIS-Concerns') { 
+steps{  
+    
+       checkout([$class: 'GitSCM',
+        branches: [[name: "${'CSC-Automation'}"]],
+        extensions: [[$class: 'CloneOption', timeout: 7000]],
+        gitTool: 'Default', 
+        userRemoteConfigs: [[credentialsId: 'UserName', url: 'https://github.com/reoPath.git']]
+    ])}}
+   
+stage('Rsyncing-CSISConcerns') { 
+            steps {
+                
+             sh 'rsync -a /var/lib/jenkins/workspace/DirOfThePipeline/* /dependency/CSIS-Concerns'
+    }}
+    
+        stage('building'){
+   
+steps {
+sh 'mvn clean install -f /dependency/CSC/Phase1/Work_Stream_B/Code/DevCode/03-HR/EMP/emp-web_pom.xml -U'
+sh 'mvn clean install -f /dependency/CSC/Phase1/Work_Stream_B/Code/DevCode/03-HR/EMP/emp-app_pom.xml -U'
+
+            
+        }
+    }
+}}

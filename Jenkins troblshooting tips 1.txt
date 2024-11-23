@@ -1,0 +1,29 @@
+to run jenkins as root :
+https://stackoverflow.com/questions/29926773/run-shell-command-in-jenkins-as-root-user
+Or add jenkins to sudor file , thats to make pipeline able to rsync or copy files witc have read only permision
+*********************************
+to use mvn in pipeline 
+must add vesrion in Global tool configration , maven name and automatic install in jenkins 
+and also add tool section in the script 
+***********************************************************************************
+to block prmot with rsync command or copy 
+yes| cp or rsync -r <source> <destnation>
+**********************************************
+to avoid clone all commits on the project 
+use depth and shallow syntax
+*****************************************
+to set and mange fetching data from Github in the script , use checkout syntax and set timeout 
+*******************************************************************
+u can manage total pipeline time by add this option in the top of pipeline
+*********************************************************
+github credinational will add as a secret then call it in checkout section 
+************************************************************************
+cosider reset permistion to folders with rsync , it will solved if jenkins run as root 
+*************************************************************************************
+the syntax is clone then rsync , then clone then rsync then start build as jenkins clean clone one by one
+****************************************
+consider to define maven enviroment to make it working fine in jenkisn "whereis mvn" then define it as a path
+*********************************************************************************************
+
+
+
